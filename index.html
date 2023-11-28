@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+
+      /* The Close Button */
+      .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bookshelf Apps</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="head_bar">
+      <div>
+        <h1 class="head_bar__title">Bookshelf Apps</h1>
+        <figure class="col-lg-3 col-md-6 col-sm-12">
+          <img
+            src="foto_ringgo-min.jpg"
+            style="width: 200px; border-radius: 30%"
+          />
+          <figcaption style="color: #6a9c89"></figcaption>
+        </figure>
+      </div>
+    </header>
+    <main>
+      <section class="input_section">
+        <h2>Masukkan Buku Baru</h2>
+        <form id="inputBook" action="#" class="form">
+          <div class="input">
+            <label for="inputJudul">Judul</label>
+            <input id="inputJudul" type="text" required />
+          </div>
+          <div class="input">
+            <label for="inputPenulis">Penulis</label>
+            <input id="inputPenulis" type="text" required />
+          </div>
+          <div class="input">
+            <label for="inputTahun">Tahun</label>
+            <input id="inputTahun" type="number" required />
+          </div>
+          <div class="input_inline">
+            <label for="inputSudahbaca">Selesai dibaca</label>
+            <input id="inputSudahbaca" type="checkbox" />
+          </div>
+          <button type="submit" class="btn-submit">Masukkan Buku ke rak</button>
+        </form>
+      </section>
+
+      <section class="search_section">
+        <h2>Cari Buku</h2>
+        <form id="searchBook" action="#" class="form">
+          <label for="input-search">Judul</label>
+          <input id="input-search" type="text" />
+          <button type="submit" class="btn-submit">Cari</button>
+        </form>
+      </section>
+
+      <section class="book_shelf">
+        <div class="book_list">
+          <h2><center>Belum Selesai Dibaca</center></h2>
+          <p class="counter">
+            <b>Jumlah: <span id="belumbaca_Count">0</span></b>
+          </p>
+        </div>
+
+        <div id="rakBelumbaca" class="book_list"></div>
+      </section>
+
+      <section class="book_shelf">
+        <div class="book_list">
+          <h2><center>Selesai Dibaca</center></h2>
+          <p class="counter">
+            <b>Jumlah: <span id="sudahbaca_Count">0</span></b>
+          </p>
+        </div>
+
+        <div id="rakSudahbaca" class="book_list"></div>
+      </section>
+
+      <div id="modal-edit" class="modal">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h3 class="font-gradient text-center">Edit Buku</h3>
+            <form id="editBook" action="#" class="form">
+              <div class="form-group field-edit-id">
+                <label for="edit-id" class="form-label">id</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  id="edit-id"
+                  name="idBook"
+                  placeholder="id buku"
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-judul" class="form-label">Judul</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  id="edit-judul"
+                  name="judul"
+                  placeholder="masukkan judul buku..."
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-penulis" class="form-label">Penulis</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  id="edit-penulis"
+                  name="penulis"
+                  placeholder="masukkan penulis buku..."
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-tahun" class="form-label">Tahun</label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="edit-tahun"
+                  name="tahun"
+                  placeholder="masukkan tahun terbit buku..."
+                />
+              </div>
+              <div class="btn-edit-wrapper">
+                <button type="submit" class="btn-submit">
+                  <i class="fas fa-save"></i> Simpan
+                </button>
+                <button class="btn-cancel">Batal</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="dom.js"></script>
+    <script src="storage.js"></script>
+  </body>
+</html>
